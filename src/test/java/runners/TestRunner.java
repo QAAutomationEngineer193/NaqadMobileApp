@@ -8,20 +8,24 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 
-@CucumberOptions(features = "src/test/java/features", glue = {"steps"},
-
-tags = "@tag1"
-
-// "(@tag1 and @tag2) or @tag3",
+@CucumberOptions(features = {"src/test/java/features/Login.feature",
+							"src/test/java/features/PayBills.feature" 
 		
-//	plugin = {
+
+}, 
+
+glue = {"steps"},
+
+tags = "@Smoke" ,
+		
+	plugin = {
 			
-     //   "pretty",                                   // Format the console output
-      //  "html:target/cucumber-reports.html",         // HTML report
-       // "json:target/cucumber-reports.json",         // JSON report
-        //"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure report
+        "pretty",                                   // Format the console output
+        "html:target/cucumber-reports.html",         // HTML report
+        "json:target/cucumber-reports.json",         // JSON report
+        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure report
               
-  //  }
+    }
 			
 		)
 

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
-	private Properties properties;
+	public Properties properties;
 
 	public PropertiesReader(String filePath) {
 		properties = new Properties();

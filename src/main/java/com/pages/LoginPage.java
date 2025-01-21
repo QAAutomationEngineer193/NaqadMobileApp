@@ -16,6 +16,7 @@ import java.util.List;
 public class LoginPage {
 
 	public AndroidDriver driver;
+	public WebDriverWait wait;
 
 	// Declare the "Permission Allow" Button using @AndroidFindBy
 	@AndroidFindBy(id = "com.android.packageinstaller:id/permission_allow_button")

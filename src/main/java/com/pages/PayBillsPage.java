@@ -1,11 +1,13 @@
 package com.pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 //import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +16,7 @@ import java.time.Duration;
 public class PayBillsPage {
 	
 	public AndroidDriver driver;
-	private WebDriverWait wait;
+	public WebDriverWait wait;
 	
 	//public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
   
@@ -91,6 +93,7 @@ public class PayBillsPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(new AppiumFieldDecorator(driver), this); // Initialize page elements
+        
     }
     
     // Methods to interact with elements
@@ -137,33 +140,67 @@ public class PayBillsPage {
         wait.until(ExpectedConditions.elementToBeClickable(nextButton3)).click();
     }
 
-    public void clickPayFullButton() {
+    public void clickPayFullButton() throws InterruptedException {
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(payFullButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(checkOption)).click();
+      
     }
 
-    public void clickCheckOption() {
+    public void clickCheckOption() throws InterruptedException {
+    	Thread.sleep(2000);
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(checkOption)).click();
     }
 
-    public void clickPayNow() {
+    public void clickPayNow() throws InterruptedException {    	
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(payNowButton)).click();
     }
 
-    public void EnterOTP(String value) {
+    public void EnterOTP() throws InterruptedException {
     	
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(inputField1)).sendKeys(value);
-        wait.until(ExpectedConditions.elementToBeClickable(inputField2)).sendKeys(value);
-        wait.until(ExpectedConditions.elementToBeClickable(inputField3)).sendKeys(value);
-        wait.until(ExpectedConditions.elementToBeClickable(inputField4)).sendKeys(value);
-        wait.until(ExpectedConditions.elementToBeClickable(inputField5)).sendKeys(value);
-        wait.until(ExpectedConditions.elementToBeClickable(inputField6)).sendKeys(value);
-        
+    	  WebElement el1 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.EditText[@resource-id=\"textInput\"])[1]")));
+          el1.sendKeys("6");         
+          WebElement el2 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.EditText[@resource-id=\"textInput\"])[2]")));
+          el2.sendKeys("6");
+          WebElement el3 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.EditText[@resource-id=\"textInput\"])[3]")));
+          el3.sendKeys("6");
+          WebElement el4 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.EditText[@resource-id=\"textInput\"])[4]")));
+          el4.sendKeys("6");
+          WebElement el5 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//android.widget.EditText[@resource-id=\"textInput\"])[5]")));
+          el5.sendKeys("6");
+          WebElement el6 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"textInput\" and @text=\"0\"]")));
+          el6.sendKeys("6");              	   	
+    	
     }
+    
+    public void VerifyOTPButton() throws InterruptedException {
+    	
+    	Thread.sleep(2000);
+    	 WebElement verifyButton = driver.findElement(AppiumBy.accessibilityId("Verify"));
+    	 verifyButton.click();
+    	 
+    	 Thread.sleep(4000);
+    	 
+    	// Wait for and click on the element with text "" using Appium's UI Automator
+    	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    	 
+    	 WebElement ExistBackReceipt = wait.until(ExpectedConditions.elementToBeClickable(
+    	     AppiumBy.androidUIAutomator("new UiSelector().text(\"\")")
+    	 ));
+    	 ExistBackReceipt.click();
 
+		 Thread.sleep(4000);
+		 	
+		 WebElement ExistBackRedeem = wait.until(ExpectedConditions.elementToBeClickable(
+		     AppiumBy.androidUIAutomator("new UiSelector().text(\"\")")
+		 ));
+		 ExistBackRedeem.click();
+    	 
+    	 
+    	 
+    	 
+    }
+      
    
 }
