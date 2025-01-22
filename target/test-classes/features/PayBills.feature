@@ -1,7 +1,7 @@
 
 @Smoke
 
-#@tag1
+@tag1
 
 Feature: Pay Bills
 

@@ -14,6 +14,12 @@ public class AllureReport {
     // Method to attach a screenshot as byte array to Allure
 	
     public static void attachScreenshot(AndroidDriver driver) {
+    	
+    	if (driver == null) {
+            System.out.println("WebDriver is not initialized. Cannot take screenshot.");
+            return;
+        }
+    	    	    	
     	byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     	Allure.addAttachment("Screenshot", new ByteArrayInputStream(screenshot));
     }

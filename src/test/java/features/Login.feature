@@ -1,4 +1,5 @@
 
+#@Login
 @Smoke
 
 Feature: User Login Functionality
@@ -9,6 +10,6 @@ Feature: User Login Functionality
     And the user clicks on Okay
     And the user clicks on Skip
     When the user logs in with valid phone number and password
-    Then the user should be logged in successfully
+   Then the user should be logged in successfully
 
     

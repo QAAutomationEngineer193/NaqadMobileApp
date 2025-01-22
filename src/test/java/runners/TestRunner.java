@@ -16,7 +16,7 @@ import io.cucumber.junit.CucumberOptions;
 
 glue = {"steps"},
 
-tags = "@Smoke" ,
+tags = "@Smoke",
 		
 	plugin = {
 			

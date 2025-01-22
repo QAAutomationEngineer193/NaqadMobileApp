@@ -12,10 +12,10 @@ import utils.TestLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class PayBillsSteps {
+public class PayBillsSteps extends BaseTest{
 
     private PayBillsPage payBillsPage;
-    private AndroidDriver driver;  // Declare the driver
+    public AndroidDriver driver;  // Declare the driver
 
     PropertiesReader reader = new PropertiesReader(
             "D:\\Code\\WorkSpace2025\\NaqadMobileApp\\src\\test\\java\\resources\\config.properties");
@@ -80,7 +80,7 @@ public class PayBillsSteps {
     public void ProceedToNextStep() throws InterruptedException {
         payBillsPage.clickOntheNextButton();
         TestLogger.logInfo("And: The proceed to the next step");
-    //  AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
+      AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
     }
     
     @And("The user clicks on the {string} as the payment option and Accept Terms & Conditions")
@@ -103,10 +103,11 @@ public class PayBillsSteps {
     
     
     @Then("The user enters OTP on OTP Verification Screen")
-    public void EnterTheOTP() throws InterruptedException {     
+    public void EnterTheOTP() throws Exception {    
+    	 AndroidDriver driver = getDriver();	
         payBillsPage.EnterOTP();  // Call the method with the OTP
-        TestLogger.logInfo("Then: The user enters OTP on OTP Verification Screen");
-    //    AllureReport.attachScreenshot(driver); // If you want to attach a screenshots
+        TestLogger.logInfo("Then: The user enters OTP on OTP Verification Screen");       
+        AllureReport.attachScreenshot(driver); // If you want to attach a screenshots
     }
 
 

@@ -4,22 +4,27 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+
 import utils.PropertiesReader;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
 public class BaseTest {
     public static AndroidDriver driver;
 
+    @Before
+    
     // Singleton pattern for AndroidDriver initialization
     public static AndroidDriver getDriver() throws Exception {
     	
-    	AppiumServer();
+    	AppiumServerStart();
     	
         if (driver == null) {
             PropertiesReader reader = new PropertiesReader(
@@ -38,27 +43,16 @@ public class BaseTest {
         }
         return driver;
     }
-
-    // Optional method to quit the driver and kill the app process
+    
+    @After
     public static void quitDriver() {
         if (driver != null) {
-            // Kill the app process using adb shell command
-            try {
-                String appPackage = driver.getCapabilities().getCapability("appPackage").toString();
-                // Killing the app via adb command to force stop the app
-                Runtime.getRuntime().exec("adb shell am force-stop " + appPackage);
-                System.out.println("App process killed: " + appPackage);
-            } catch (Exception e) {
-                System.err.println("Failed to kill app process: " + e.getMessage());
-            }
-
             driver.quit();
             driver = null;
         }
     }
-    
-    
-    public static void AppiumServer() {
+
+    public static void AppiumServerStart() {
     	  	  	
     	 try {
              // Define the log file path
@@ -118,25 +112,7 @@ public class BaseTest {
     
     	
 }
-    	
-		/*
-		 * AppiumDriverLocalService service = AppiumDriverLocalService.buildService(new
-		 * AppiumServiceBuilder() .usingDriverExecutable(new
-		 * File("C:\\Program Files\\nodejs\\node.exe")) .withAppiumJS(new File(
-		 * "C:\\Users\\IT\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"
-		 * )) //
-		 * "C:\\Users\\SQA Engineer\\AppData\\Local\\Programs\\Appium\\resources\\app\\node_modules\\appium\\build\\lib\\main.js"
-		 * )) .withLogFile(new File(System.getProperty("user.dir") +
-		 * "\\src\\test\\resources\\log.txt"))
-		 * .withArgument(GeneralServerFlag.LOCAL_TIMEZONE)); service.start();
-		 */
-
-		//Start_Appium_Server_with_itel();
-	//	Start_Appium_Server_with_oppo();
-		//service.stop();
-    	
-    	
-    	
+    
     	
     
     

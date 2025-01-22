@@ -55,7 +55,9 @@ public class LoginSteps extends BaseTest {
 	}
 
 	@Wenn("the user logs in with valid phone number and password")
-	public void theUserLogsInWithValidPhoneNumberAndPassword() throws IOException, InterruptedException {
+	public void theUserLogsInWithValidPhoneNumberAndPassword() throws Exception {
+		
+		AndroidDriver driver = getDriver();		
 		String filepath = "D:\\Code\\WorkSpace2025\\NaqadMobileApp\\src\\test\\java\\resources\\testdata.xlsx";
 		String phone = "561243500";
 		TestLogger.logInfo("Enter phone: " + phone);
@@ -64,13 +66,12 @@ public class LoginSteps extends BaseTest {
 		String password = ExcelReader.readData(filepath, "Sheet1", 0, 1);
 		TestLogger.logInfo("Enter Password: " + password);
 		loginPage.passwordField(password);
-	   // AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
+	    AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
 	}
 
 	@Then("the user should be logged in successfully")
 	public void theUserLogsInSuccessFully() throws IOException, InterruptedException {
 		loginPage.loginButton();
 		TestLogger.logInfo("Then: The user is successfully logged into the app");
-	//	 AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
 	}
 }
