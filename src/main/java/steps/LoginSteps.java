@@ -59,7 +59,7 @@ public class LoginSteps extends BaseTest {
 		
 		AndroidDriver driver = getDriver();		
 		String filepath = "D:\\Code\\WorkSpace2025\\NaqadMobileApp\\src\\test\\java\\resources\\testdata.xlsx";
-		String phone = "561243500";
+		String phone = "561243031";
 		TestLogger.logInfo("Enter phone: " + phone);
 		loginPage.phoneNumberField(phone);
 

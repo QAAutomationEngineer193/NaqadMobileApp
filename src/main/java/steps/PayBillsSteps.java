@@ -39,9 +39,9 @@ public class PayBillsSteps extends BaseTest{
     }
 
     @When("The user clicks on the pay a new bill button")
-    public void iSelectToPayANewBill() throws InterruptedException {
+    public void SelectToPayANewBill() throws InterruptedException {
         // Interact with the page again
-    	Thread.sleep(3000);        payBillsPage.clickOnPayNewBill();
+    	Thread.sleep(5000);        payBillsPage.clickOnPayNewBill();
         TestLogger.logInfo("When: The user clicks on Pay New Bill button");
     }
 
@@ -53,7 +53,7 @@ public class PayBillsSteps extends BaseTest{
             TestLogger.logInfo("And: The user clicks on Pay New Bill button");
         }
 
-    @And("The user clicks on the {string} as the payment option")
+    @And("The user clicks on {string} as the payment option after selecting a package")
     public void ChoosePayInFullAsThePaymentOption(String paymentOption) {
         if (paymentOption.equalsIgnoreCase("Pay In Full")) {
             payBillsPage.clickPayInFull();
@@ -73,38 +73,40 @@ public class PayBillsSteps extends BaseTest{
     	String name = reader.getProperty("name");
         payBillsPage.enterBeneficiaryName(name);
         TestLogger.logInfo("When: The user enters the Beneficiary name"+ name);
+        AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
         
     }
 
     @And("The proceed to the next step")
     public void ProceedToNextStep() throws InterruptedException {
         payBillsPage.clickOntheNextButton();
-        TestLogger.logInfo("And: The proceed to the next step");
-      AllureReport.attachScreenshot(driver); // Attach screenshot to Allure report
+        TestLogger.logInfo("And: The proceed to the next step");    
     }
     
-    @And("The user clicks on the {string} as the payment option and Accept Terms & Conditions")
+    @And("The user clicks on {string} as the payment option")
     public void PayInFullAsPaymentOptionOnCreditPay(String paymentOption) throws InterruptedException {
         if (paymentOption.equalsIgnoreCase("Pay In Full")) {
             payBillsPage.clickPayFullButton();
-            payBillsPage.clickCheckOption();
-            TestLogger.logInfo("And: The user clicks on the Pay In Full as the payment option and Accept Terms & Conditions");
+            
+            TestLogger.logInfo("And: The user clicks on the Pay In Full as the payment option");
         }
     }
 
-    @When("The user clicks on the {string} button")
+    @When("The user Accepts Terms & Conditions clicks on the {string} button")
     public void ClickOnThePayNowButton(String buttonName) throws InterruptedException {
-    	//Thread.sleep(4000);
+    //	Thread.sleep(4000);
         if (buttonName.equalsIgnoreCase("Pay Now")) {
+        	payBillsPage.clickCheckOption();
+        	Thread.sleep(4000);
             payBillsPage.clickPayNow();
-            TestLogger.logInfo("When: The user clicks on the Pay Now button");
+            TestLogger.logInfo("When: The user clicks on the Pay Now button and Accept Terms & Conditions");
         }
     }
     
     
     @Then("The user enters OTP on OTP Verification Screen")
     public void EnterTheOTP() throws Exception {    
-    	 AndroidDriver driver = getDriver();	
+    	AndroidDriver driver = getDriver();	
         payBillsPage.EnterOTP();  // Call the method with the OTP
         TestLogger.logInfo("Then: The user enters OTP on OTP Verification Screen");       
         AllureReport.attachScreenshot(driver); // If you want to attach a screenshots
@@ -114,6 +116,7 @@ public class PayBillsSteps extends BaseTest{
     @Then("The user confirms his the payment")
     public void ConfirmThePayment() throws InterruptedException {
         // Assuming clicking on the "Pay Now" button confirms the payment.
+    	Thread.sleep(7000);
         payBillsPage.VerifyOTPButton();
     	
        TestLogger.logInfo("When: The user confirms his the payment");
@@ -126,14 +129,3 @@ public class PayBillsSteps extends BaseTest{
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//}

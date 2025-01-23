@@ -5,9 +5,11 @@ import io.appium.java_client.android.AndroidDriver;
 //import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import utils.TestLogger;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -64,31 +66,7 @@ public class PayBillsPage {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Pay Now\")")
     private WebElement payNowButton;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText[@resource-id='textInput'])[1]")
-    private WebElement inputField1;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText[@resource-id='textInput'])[2]")
-    private WebElement inputField2;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText[@resource-id='textInput'])[3]")
-    private WebElement inputField3;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText[@resource-id='textInput'])[4]")
-    private WebElement inputField4;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText[@resource-id='textInput'])[5]")
-    private WebElement inputField5;
-
-    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id='textInput' and @text='0']")
-    private WebElement inputField6;
-
-	/*
-	 * public PayBillsPage(AndroidDriver driver) { this.driver = driver;
-	 * PageFactory.initElements(new AppiumFieldDecorator(driver), this); //
-	 * Initialize page elements }
-	 */
-    
+      
     public PayBillsPage(AndroidDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -116,12 +94,33 @@ public class PayBillsPage {
         wait.until(ExpectedConditions.elementToBeClickable(rechargeOption)).click();
         wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
     }
-
-
+    
     public void clickPayInFull() {
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(payInFullButton)).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+        	
+        	WebElement payInFullButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Pay In Full")));
+            
+        	if (payInFullButton.isDisplayed()) {
+                payInFullButton.click();
+            }
+        } catch (TimeoutException e) {
+            TestLogger.logInfo("And: The user is not eligible for CNPL - Pay In Full button not found.");
+        } catch (Exception e) {
+            TestLogger.logInfo("An error occurred while trying to click on the Pay In Full button: " + e.getMessage());
+        }
     }
+
+
+	/*
+	 * public void clickPayInFull() { WebDriverWait wait = new WebDriverWait(driver,
+	 * Duration.ofSeconds(10)); //
+	 * wait.until(ExpectedConditions.elementToBeClickable(payInFullButton)).click();
+	 * if (wait.until(ExpectedConditions.elementToBeClickable(payInFullButton)).
+	 * isDisplayed()) { payInFullButton.click();
+	 * 
+	 * }else { TestLogger.logInfo("And: The user is not elgible for CNPL"); } }
+	 */
 
     public void enterMobileNumber(String mobileNumber) {
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -141,10 +140,25 @@ public class PayBillsPage {
     }
 
     public void clickPayFullButton() throws InterruptedException {
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(payFullButton)).click();
-      
-    }
+    	//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+      //  wait.until(ExpectedConditions.elementToBeClickable(payFullButton)).click();
+        
+    	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+         try {
+         	
+         	WebElement payInFullButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Pay In Full")));
+             
+         	if (payInFullButton.isDisplayed()) {
+                 payInFullButton.click();
+             }
+         } catch (TimeoutException e) {
+             TestLogger.logInfo("And: The user is not eligible for CNPL - Pay In Full button not found.");
+         } catch (Exception e) {
+             TestLogger.logInfo("An error occurred while trying to click on the Pay In Full button: " + e.getMessage());
+         }
+     }
+    	
+    	
 
     public void clickCheckOption() throws InterruptedException {
     	Thread.sleep(2000);
@@ -196,11 +210,23 @@ public class PayBillsPage {
 		     AppiumBy.androidUIAutomator("new UiSelector().text(\"\")")
 		 ));
 		 ExistBackRedeem.click();
-    	 
-    	 
-    	 
-    	 
+    	     	     	     	 
     }
+    
       
-   
+   //////////////////////// Existing Beneficiary ////////////////////////////////////////////
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

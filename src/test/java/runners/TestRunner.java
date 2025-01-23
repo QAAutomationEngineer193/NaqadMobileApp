@@ -20,10 +20,10 @@ tags = "@Smoke",
 		
 	plugin = {
 			
-        "pretty",                                   // Format the console output
-        "html:target/cucumber-reports.html",         // HTML report
-        "json:target/cucumber-reports.json",         // JSON report
-        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure report
+    //    "pretty",                                   // Format the console output
+    //    "html:target/cucumber-reports.html",         // HTML report
+    //    "json:target/cucumber-reports.json",         // JSON report
+    //    "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure report
               
     }
 			
